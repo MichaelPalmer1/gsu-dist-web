@@ -1,0 +1,20 @@
+@import url('https://plus.google.com/_/scs/apps-static/_/ss/k=oz.sbw_bss.4n48kyb7rncb.L.W.O/d=0/rs=AGLTcCOUtT_X-T4Pfk3n-XoOntdbG1_hVQ');
+
+table {
+    border: 1px solid #aaa;
+}
+
+td {
+    background: #eee;
+    border: 1px solid #ccc;
+    border-top: none;
+    border-left: none;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+td:last-child {
+    border-right: none;
+}
