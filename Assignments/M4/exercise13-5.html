@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script type="text/javascript">
+            function incCounter() {
+                var counter = document.getElementById("counter");
+                counter.innerHTML = parseInt(counter.innerHTML, 10) + 1;
+            }
+        </script>
+    </head>
+    <body>
+        <h1>Exercise 13.5</h1>
+        <form>
+            <input type="text" onblur="this.value=this.value.replace(/\s?&\s?/g, ' and ');">
+        </form>
+    </body>
+</html>

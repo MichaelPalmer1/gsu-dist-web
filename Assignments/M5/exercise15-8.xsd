@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema">
+    <element name="product">
+        <complexType>
+            <sequence>
+                <element name="productName" type="xs:string" />
+                <element name="servingSize" type="xs:string" />
+                <element name="calories" type="xs:integer" />
+                <element name="fatCalories" type="xs:integer" />
+                <element name="fat" type="xs:string" />
+                <element name="saturatedFat" type="xs:string" />
+                <element name="sodium" type="xs:string" />
+                <element name="cholesterol" type="xs:string" />
+                <element name="carbohydrates" type="xs:string" />
+                <element name="fiber" type="xs:string" />
+                <element name="sugar" type="xs:string" />
+                <element name="protein" type="xs:string" />
+            </sequence>
+        </complexType>
+    </element>
+</schema>

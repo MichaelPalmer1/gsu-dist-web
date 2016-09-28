@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script type="text/javascript">
+        function roll() {
+            var die1, die2;
+            die1 = 1 + parseInt(Math.random() * (6 - 1 + 1), 10);
+            die2 = 1 + parseInt(Math.random() * (6 - 1 + 1), 10);
+            return die1 + die2;
+        }
+
+        function performRolls() {
+            var results = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], i;
+
+            // Perform the rolls
+            for (i = 0; i < 36000; i += 1) {
+                results[roll() - 2] += 1;
+            }
+
+            // Fill the table
+            for (i = 2; i <= 12; i += 1) {
+                document.getElementById(i).innerHTML = results[i - 2];
+            }
+        }
+        </script>
+        <style type="text/css">
+            td, th {
+                border-left: 1px solid black;
+                border-top: 1px solid black;
+            }
+            td:last-child, th:last-child {
+                border-right: 1px solid black;
+            }
+            tr:last-child td {
+                border-bottom: 1px solid black;
+            }
+        </style>
+    </head>
+    <body>
+        <button onclick="performRolls()">Roll</button>
+        <br /><br />
+        <table id="results" cellspacing="0" cellpadding="10px">
+            <tr>
+                <th>2</th>
+                <th>3</th>
+                <th>4</th>
+                <th>5</th>
+                <th>6</th>
+                <th>7</th>
+                <th>8</th>
+                <th>9</th>
+                <th>10</th>
+                <th>11</th>
+                <th>12</th>
+            </tr>
+            <tr>
+                <td id="2"></td>
+                <td id="3"></td>
+                <td id="4"></td>
+                <td id="5"></td>
+                <td id="6"></td>
+                <td id="7"></td>
+                <td id="8"></td>
+                <td id="9"></td>
+                <td id="10"></td>
+                <td id="11"></td>
+                <td id="12"></td>
+            </tr>
+        </table>
+    </body>
+</html>

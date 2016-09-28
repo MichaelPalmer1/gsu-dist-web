@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <h1>HTML5 Canvas</h1>
+        <canvas id="canvas" />
+        <script type="text/javascript">
+            var canvas = document.getElementById("canvas");
+            var context = canvas.getContext("2d");
+
+            // Draw a circle
+            context.beginPath();
+            context.arc(50, 50, 35, 0, 2 * Math.PI)
+            context.fill();
+        </script>
+    </body>
+</html>
