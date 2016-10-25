@@ -1,0 +1,14 @@
+[
+    {
+        "id": 1,
+        "thumb_url": "https://cloud.google.com/_static/images/cloud/products/logos/svg/compute-engine.svg"
+    },
+    {
+        "id": 2,
+        "thumb_url": "https://cloud.google.com/_static/images/cloud/products/logos/svg/appengine.svg"
+    },
+    {
+        "id": 3,
+        "thumb_url": "https://cloud.google.com/_static/images/cloud/products/logos/svg/container-engine.svg"
+    }
+]

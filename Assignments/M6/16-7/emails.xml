@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<emails>
+    <email>email@example.com</email>
+    <email>john@doe.com</email>
+    <email>nobody@example.com</email>
+</emails>

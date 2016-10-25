@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Product Catalog</title>
+    <style type="text/css">
+        th,
+        td {
+            border-top: 1px solid black;
+            border-left: 1px solid black;
+            text-align: center;
+        }
+        
+        th:last-child,
+        td:last-child {
+            border-right: 1px solid black;
+        }
+        
+        tr:last-child td {
+            border-bottom: 1px solid black;
+        }
+
+    </style>
+    <script>
+        var asyncRequest;
+        var products = [];
+        
+        /**
+          * Perform an AJAX request
+          *
+          * @param {String} url URL to query
+          * @param {Function} callback Function to call when the ready state changes
+          */
+        function getData(url, callback) {
+            try {
+                asyncRequest = new XMLHttpRequest();
+                asyncRequest.addEventListener("readystatechange", callback, false);
+                asyncRequest.open("GET", url, true);
+                asyncRequest.send(null);
+            } catch (exception) {
+                alert("Request Failed");
+            }
+        }
+
+        /**
+          * Process the products
+          */
+        function processProducts() {
+            if (asyncRequest.readyState == 4 && asyncRequest.status == 200) {
+                // Fill the product array and fetch the thumbnails
+                products = JSON.parse(asyncRequest.response);
+                getData('product-thumbs.json', processThumbs);
+            }
+        }
+
+        /**
+          * Process the product thumbnails
+          */
+        function processThumbs() {
+            if (asyncRequest.readyState == 4 && asyncRequest.status == 200) {
+                var data = JSON.parse(asyncRequest.response);
+                for (var i = 0; i < data.length; i++) {
+                    // Add thumbnail to the appropriate product
+                    if (products[i].id == data[i].id) {
+                        products[i].thumb_url = data[i].thumb_url;
+                    }
+                }
+                // Generate the table
+                generateTable();
+            }
+        }
+
+        /**
+          * Add description to an element
+          *
+          * @param {Integer} id Product id
+          * @param {DOMElement} element Element to add the description to
+          */
+        function addDescription(id, element) {
+            if (asyncRequest.readyState == 4 && asyncRequest.status == 200) {
+                var data = JSON.parse(asyncRequest.response);
+                for (var i = 0; i < data.length; i++) {
+                    if (data[i].id == id) {
+                        var description = document.createElement('p');
+                        description.textContent = data[i].description;
+                        element.appendChild(description);
+                        break;
+                    }
+                }
+            }
+        }
+        
+        /**
+          * Get the full size image for a product
+          *
+          * @param {Integer} id Product id
+          * @return {String} Image url
+          */
+        function getImage(id) {
+            if (asyncRequest.readyState == 4 && asyncRequest.status == 200) {
+                var data = JSON.parse(asyncRequest.response);
+                for (var i = 0; i < data.length; i++) {
+                    if (data[i].id == id) {
+                        return data[i].image_url;
+                    }
+                }
+            }
+            return "";
+        }
+
+        /**
+          * Generate the html table
+          */
+        function generateTable() {
+            var product_table = document.getElementById('products');
+            for (var i = 0; i < products.length; i++) {
+                // Table row
+                var tableRow = document.createElement('tr');
+                // Store index in a data attribute for later reference
+                tableRow.setAttribute('data-id', products[i].id);
+                
+                // Image
+                var imageCell = document.createElement('td');
+                var image = document.createElement('img');
+                var thumb_url = products[i].thumb_url;
+                image.setAttribute('src', thumb_url);
+                // Show full image on mouse over
+                image.onmouseover = function() {
+                    var that = this;
+                    // Get the full image from the product images listing
+                    getData('product-images.json', function() {
+                        that.src = getImage(that.parentElement.parentElement.dataset.id);
+                    });
+                };
+                // Revert to thumbnail on mouse out
+                image.onmouseout = function() {
+                    this.src = thumb_url;
+                };
+                imageCell.appendChild(image);
+                tableRow.appendChild(imageCell);
+
+                // Title
+                var titleCell = document.createElement('td');
+                titleCell.textContent = products[i].title;
+                tableRow.appendChild(titleCell);
+
+                // Price
+                var priceCell = document.createElement('td');
+                priceCell.textContent = '$' + products[i].price;
+                tableRow.appendChild(priceCell);
+
+                // Description
+                var descriptionCell = document.createElement('td');
+                var descriptionButton = document.createElement('button');
+                descriptionButton.setAttribute('type', 'button');
+                descriptionButton.textContent = 'Show description';
+                descriptionButton.onclick = function() {
+                    var that = this;
+                    getData('product-descriptions.json', function() {
+                        that.disabled = true;
+                        addDescription(that.parentElement.parentElement.dataset.id, that.parentElement);
+                    });
+                };
+                descriptionCell.appendChild(descriptionButton);
+                tableRow.appendChild(descriptionCell);
+
+                // Add to product table
+                product_table.appendChild(tableRow);
+            }
+        }
+
+    </script>
+</head>
+
+<body onload="getData('products.json', processProducts)">
+    <table id="products" cellspacing="0">
+        <tr>
+            <th>Image</th>
+            <th>Title</th>
+            <th>Price</th>
+            <th>Description</th>
+        </tr>
+    </table>
+</body>
+
+</html>

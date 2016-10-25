@@ -1,0 +1,14 @@
+[
+    {
+        "id": 1,
+        "description": "Run large-scale workloads on virtual machines hosted on Google's infrastructure"
+    },
+    {
+        "id": 2,
+        "description": "A platform for building scalable web apps and mobile backends"
+    },
+    {
+        "id": 3,
+        "description": "Run Docker containers on Google's infrastructure, powered by Kubernetes"
+    }
+]

@@ -1,0 +1,14 @@
+[
+    {
+        "id": 1,
+        "image_url": "https://cloud.google.com/images/products/artwork/fast-efficient-networking.svg"
+    },
+    {
+        "id": 2,
+        "image_url": "https://cloud.google.com/images/products/appengine/integrated.png"
+    },
+    {
+        "id": 3,
+        "image_url": "https://cloud.google.com/images/products/artwork/declaritive-management.png"
+    }
+]
